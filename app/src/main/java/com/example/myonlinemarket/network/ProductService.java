@@ -11,7 +11,7 @@ import retrofit2.http.QueryMap;
 
 public interface ProductService {
 
-    @GET(".")
-    Call<List<Product>> getProductList(@QueryMap Map<String, String> );
+    @GET("products")
+    Call<List<Product>> getProductList(@QueryMap Map<String, String> options);
 
 }

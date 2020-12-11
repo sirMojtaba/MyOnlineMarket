@@ -4,16 +4,22 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.myonlinemarket.model.Product;
+import com.example.myonlinemarket.repository.ProductRepository;
+
+import java.util.List;
+
 public class HomeViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private MutableLiveData<List<Product>> mProductListMutableLiveData;
+    private ProductRepository mProductRepository;
 
     public HomeViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
+        mProductRepository = ProductRepository.getProductRepository();
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public MutableLiveData<List<Product>> getProductListMutableLiveData() {
+        mProductListMutableLiveData = mProductRepository.getListLiveData();
+        return mProductListMutableLiveData;
     }
 }

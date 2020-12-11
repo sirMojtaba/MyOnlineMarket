@@ -18,10 +18,11 @@ import androidx.navigation.Navigation;
 
 import com.example.myonlinemarket.R;
 import com.example.myonlinemarket.databinding.FragmentCartBinding;
+import com.example.myonlinemarket.network.ProductService;
+import com.example.myonlinemarket.network.RetrofitInstance;
 
 public class CartFragment extends Fragment {
 
-    private Button mButton;
     private NavController mNavController;
 
 
@@ -34,14 +35,6 @@ public class CartFragment extends Fragment {
         cartViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-            }
-        });
-
-
-        mButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mNavController.navigate(R.id.action_navigation_cart_to_testFragment);
             }
         });
 
