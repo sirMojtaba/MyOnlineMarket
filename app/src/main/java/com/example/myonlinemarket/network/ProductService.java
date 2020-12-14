@@ -10,8 +10,6 @@ import retrofit2.http.GET;
 import retrofit2.http.QueryMap;
 
 public interface ProductService {
-
     @GET("products")
     Call<List<Product>> getProductList(@QueryMap Map<String, String> options);
-
 }

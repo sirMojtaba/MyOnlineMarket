@@ -29,6 +29,5 @@ public class RetrofitInstance {
         gsonBuilder.registerTypeAdapter(type, typeAdapter);
         Gson gson = gsonBuilder.create();
         return GsonConverterFactory.create(gson);
-
     }
 }

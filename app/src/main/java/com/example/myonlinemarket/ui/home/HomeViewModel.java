@@ -1,7 +1,6 @@
 package com.example.myonlinemarket.ui.home;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.myonlinemarket.model.Product;
@@ -11,15 +10,15 @@ import java.util.List;
 
 public class HomeViewModel extends ViewModel {
 
-    private MutableLiveData<List<Product>> mProductListMutableLiveData;
+    private LiveData<List<Product>> mProductListLiveData;
     private ProductRepository mProductRepository;
 
     public HomeViewModel() {
         mProductRepository = ProductRepository.getProductRepository();
     }
 
-    public MutableLiveData<List<Product>> getProductListMutableLiveData() {
-        mProductListMutableLiveData = mProductRepository.getListLiveData();
-        return mProductListMutableLiveData;
+    public LiveData<List<Product>> getProductListMutableLiveData() {
+        mProductListLiveData = mProductRepository.getListLiveData();
+        return mProductListLiveData;
     }
 }

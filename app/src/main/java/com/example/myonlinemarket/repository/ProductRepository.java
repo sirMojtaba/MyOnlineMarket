@@ -20,8 +20,6 @@ import retrofit2.Retrofit;
 public class ProductRepository {
 
     private static ProductRepository sProductRepository;
-    private ProductService mProductService;
-    private MutableLiveData<List<Product>> mListLiveData = new MutableLiveData<>();
 
     public static ProductRepository getProductRepository() {
         if (sProductRepository == null)
@@ -29,9 +27,11 @@ public class ProductRepository {
         return sProductRepository;
     }
 
+    private ProductService mProductService;
+    private MutableLiveData<List<Product>> mListLiveData = new MutableLiveData<>();
+
     private ProductRepository() {
-        Type type = new TypeToken<List<Product>>() {
-        }.getType();
+        Type type = new TypeToken<List<Product>>() {}.getType();
         Object typeAdapter = new GetProductListDeserializer();
         Retrofit retrofit = RetrofitInstance.getRetrofitInstance(type, typeAdapter);
         mProductService = retrofit.create(ProductService.class);
@@ -39,7 +39,7 @@ public class ProductRepository {
 
     public MutableLiveData<List<Product>> getListLiveData() {
 
-        Call<List<Product>> call = mProductService.getProductList(NetworkParameters.queryOptions);
+        Call<List<Product>> call = mProductService.getProductList(NetworkParameters.queryNewestList);
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {

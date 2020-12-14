@@ -1,16 +1,11 @@
 package com.example.myonlinemarket.model;
 
-import android.net.Uri;
-
-import java.net.URI;
-import java.net.URL;
-
-import retrofit2.http.Url;
+import java.util.List;
 
 public class Product {
     private String mName;
     private String mPrice;
-    private Uri mURL;
+    private List<String> mURL;
 
     public String getName() {
         return mName;
@@ -28,16 +23,17 @@ public class Product {
         mPrice = price;
     }
 
-    public Uri getURL() {
+    public List<String> getURL() {
         return mURL;
     }
 
-    public void setURL(Uri URL) {
+    public void setURL(List<String> URL) {
         mURL = URL;
     }
 
-    public Product(String name, String price) {
+    public Product(String name, String price, List<String> URL) {
         mName = name;
         mPrice = price;
+        mURL = URL;
     }
 }
