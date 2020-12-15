@@ -4,13 +4,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.example.myonlinemarket.ui.home.HomeViewModel" />
+        <variable
+            name="position"
+            type="Integer" />
+    </data>
+
+
     <RelativeLayout
+        android:id="@+id/layout_item"
         android:layout_width="150dp"
         android:layout_height="280dp"
         android:layout_margin="8dp"
         android:background="@drawable/background_list_item"
         android:gravity="center"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:onClick="@{()->viewmodel.onItemSelected(position)}">
 
         <ImageView
             android:id="@+id/image_view"

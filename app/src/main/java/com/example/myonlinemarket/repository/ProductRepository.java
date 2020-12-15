@@ -1,5 +1,7 @@
 package com.example.myonlinemarket.repository;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.myonlinemarket.model.Product;
@@ -28,7 +30,9 @@ public class ProductRepository {
     }
 
     private ProductService mProductService;
-    private MutableLiveData<List<Product>> mListLiveData = new MutableLiveData<>();
+    private MutableLiveData<List<Product>> mLiveDataNewestList = new MutableLiveData<>();
+    private MutableLiveData<List<Product>> mLiveDataMostVisitedList = new MutableLiveData<>();
+    private MutableLiveData<List<Product>> mLiveDataMostPopularList = new MutableLiveData<>();
 
     private ProductRepository() {
         Type type = new TypeToken<List<Product>>() {}.getType();
@@ -37,13 +41,13 @@ public class ProductRepository {
         mProductService = retrofit.create(ProductService.class);
     }
 
-    public MutableLiveData<List<Product>> getListLiveData() {
-
+    public MutableLiveData<List<Product>> getLiveDataNewestList() {
+        Log.d("tag3", "getLiveDataNewestList");
         Call<List<Product>> call = mProductService.getProductList(NetworkParameters.queryNewestList);
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                mListLiveData.setValue(response.body());
+                mLiveDataNewestList.setValue(response.body());
             }
 
             @Override
@@ -51,6 +55,40 @@ public class ProductRepository {
 
             }
         });
-        return mListLiveData;
+        return mLiveDataNewestList;
+    }
+
+    public MutableLiveData<List<Product>> getLiveDataMostVisitedList() {
+        Log.d("tag3", "getLiveDataMostVisitedList");
+        Call<List<Product>> call = mProductService.getProductList(NetworkParameters.queryMostVisitedList);
+        call.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                mLiveDataMostVisitedList.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+
+            }
+        });
+        return mLiveDataMostVisitedList;
+    }
+
+    public MutableLiveData<List<Product>> getLiveDataMostPopularList() {
+        Log.d("tag3", "getLiveDataMostPopularList");
+        Call<List<Product>> call = mProductService.getProductList(NetworkParameters.queryRatingList);
+        call.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                mLiveDataMostPopularList.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+
+            }
+        });
+        return mLiveDataMostPopularList;
     }
 }

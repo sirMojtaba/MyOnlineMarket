@@ -9,11 +9,7 @@
         android:id="@+id/navigation_cart"
         android:name="com.example.myonlinemarket.ui.cart.CartFragment"
         android:label="@string/title_sale"
-        tools:layout="@layout/fragment_cart" >
-        <action
-            android:id="@+id/action_navigation_cart_to_testFragment"
-            app:destination="@id/testFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_cart" />
 
     <fragment
         android:id="@+id/navigation_categories"
@@ -25,10 +21,21 @@
         android:id="@+id/navigation_home"
         android:name="com.example.myonlinemarket.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/testFragment"
-        android:name="com.example.myonlinemarket.ui.TestFragment"
-        android:label="fragment_test"
-        tools:layout="@layout/fragment_test" />
+        android:id="@+id/productDetailFragment"
+        android:name="com.example.myonlinemarket.ui.ProductDetailFragment"
+        android:label="ProductDetailFragment" >
+        <argument
+            android:name="productId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_productDetailFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 </navigation>

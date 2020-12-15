@@ -15,7 +15,7 @@ public class NetworkParameters {
         put("orderby", "date");
     }};
 
-    public static Map<String, String> queryPopularityList = new HashMap<String, String>() {{
+    public static Map<String, String> queryMostVisitedList = new HashMap<String, String>() {{
         put("consumer_key", CONSUMER_KEY);
         put("consumer_secret", CONSUMER_SECRET);
         put("orderby", "popularity");
