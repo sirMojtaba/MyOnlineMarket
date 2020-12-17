@@ -42,7 +42,6 @@ public class ProductRepository {
     }
 
     public MutableLiveData<List<Product>> getLiveDataNewestList() {
-        Log.d("tag3", "getLiveDataNewestList");
         Call<List<Product>> call = mProductService.getProductList(NetworkParameters.queryNewestList);
         call.enqueue(new Callback<List<Product>>() {
             @Override
@@ -59,7 +58,6 @@ public class ProductRepository {
     }
 
     public MutableLiveData<List<Product>> getLiveDataMostVisitedList() {
-        Log.d("tag3", "getLiveDataMostVisitedList");
         Call<List<Product>> call = mProductService.getProductList(NetworkParameters.queryMostVisitedList);
         call.enqueue(new Callback<List<Product>>() {
             @Override
@@ -76,7 +74,6 @@ public class ProductRepository {
     }
 
     public MutableLiveData<List<Product>> getLiveDataMostPopularList() {
-        Log.d("tag3", "getLiveDataMostPopularList");
         Call<List<Product>> call = mProductService.getProductList(NetworkParameters.queryRatingList);
         call.enqueue(new Callback<List<Product>>() {
             @Override

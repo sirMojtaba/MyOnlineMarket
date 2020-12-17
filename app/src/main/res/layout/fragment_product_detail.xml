@@ -1,39 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="product"
+            type="com.example.myonlinemarket.model.Product" />
+    </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="4dp">
+        android:background="#F3F3F3">
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/button_cart">
+            android:layout_above="@id/bottom_layout">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="4dp"
                 tools:context=".ui.ProductDetailFragment">
 
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/view_pager_image"
+                <com.smarteist.autoimageslider.SliderView
+                    android:id="@+id/image_slider"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp">
+                    android:layout_height="300dp"
+                    app:sliderAnimationDuration="600"
+                    app:sliderAutoCycleDirection="back_and_forth"
+                    app:sliderIndicatorAnimationDuration="500"
+                    app:sliderIndicatorGravity="bottom|left"
+                    app:sliderIndicatorMargin="50dp"
+                    app:sliderIndicatorOrientation="horizontal"
+                    app:sliderIndicatorPadding="3dp"
+                    app:sliderIndicatorRadius="1dp"
+                    app:sliderIndicatorSelectedColor="#5A5A5A"
+                    app:sliderIndicatorUnselectedColor="#B8B8B8"
+                    app:sliderScrollTimeInSec="1" />
+                <!--                app:sliderStartAutoCycle="true"-->
+                <!--                app:sliderAutoCycleEnabled="true"-->
 
-                </androidx.viewpager2.widget.ViewPager2>
 
                 <TextView
                     android:id="@+id/text_view_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/view_pager_image"
-                    android:layout_marginTop="4dp"
-                    android:text="عنوان محصول"
+                    android:layout_below="@id/image_slider"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:fontFamily="@font/byekan"
+                    android:padding="16dp"
+                    android:text="@{product.name}"
                     android:textAlignment="viewEnd"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/text_view_features"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_view_title"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    android:fontFamily="@font/byekan"
+                    android:paddingTop="16dp"
+                    android:paddingRight="16dp"
+                    android:text="ویژگی های محصول"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -41,31 +78,59 @@
                     android:id="@+id/text_view_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/text_view_title"
-                    android:text="ویژگی ها"
-                    android:textAlignment="viewEnd" />
-
+                    android:layout_below="@id/text_view_features"
+                    android:background="#FFFFFF"
+                    android:fontFamily="@font/byekan"
+                    android:padding="16dp"
+                    android:text="@{product.description}"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#000000" />
 
             </RelativeLayout>
         </ScrollView>
 
-        <Button
-            android:id="@+id/button_cart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
+        <LinearLayout
+            android:id="@+id/bottom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
             android:layout_alignParentBottom="true"
-            android:text="افزودن به سبد خرید"
-            android:textStyle="bold" />
+            android:background="#FFFFFF"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/text_view_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:text="100000 تومان"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/byekan"
+                android:gravity="center_vertical"
+                android:text="تومان"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_view_price"
+                android:layout_width="190dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="4dp"
+                android:fontFamily="@font/byekan"
+                android:gravity="start|center_vertical"
+                android:text="@{product.price}"
+                android:textAlignment="viewStart"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/button_cart"
+                android:layout_width="160dp"
+                android:layout_height="60dp"
+                android:fontFamily="@font/byekan"
+                android:text="افزودن به سبد خرید"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
     </RelativeLayout>
 </layout>

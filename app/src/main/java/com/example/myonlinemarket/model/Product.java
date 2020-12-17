@@ -1,9 +1,13 @@
 package com.example.myonlinemarket.model;
 
+import android.text.Html;
+
+import java.io.Serializable;
 import java.util.List;
 
-public class Product {
+public class Product implements Serializable {
     private String mName;
+    private String mDescription;
     private String mPrice;
     private List<String> mURL;
 
@@ -31,8 +35,17 @@ public class Product {
         mURL = URL;
     }
 
-    public Product(String name, String price, List<String> URL) {
+    public String getDescription() {
+        return Html.fromHtml(mDescription).toString();
+    }
+
+    public void setDescription(String description) {
+        mDescription = description;
+    }
+
+    public Product(String name, String description, String price, List<String> URL) {
         mName = name;
+        mDescription = description;
         mPrice = price;
         mURL = URL;
     }

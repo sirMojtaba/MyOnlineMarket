@@ -1,6 +1,7 @@
 package com.example.myonlinemarket;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -26,5 +27,9 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+    }
+
+    private void hideBottomNavigation(BottomNavigationView navView) {
+        navView.setVisibility(View.GONE);
     }
 }

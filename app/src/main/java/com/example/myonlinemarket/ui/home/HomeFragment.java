@@ -1,7 +1,6 @@
 package com.example.myonlinemarket.ui.home;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,8 +44,6 @@ public class HomeFragment extends Fragment {
         mProductAdapterNewest = new ProductAdapter(getContext(), mHomeViewModel);
         mProductAdapterMostVisited = new ProductAdapter(getContext(), mHomeViewModel);
         mProductAdapterMostPopular = new ProductAdapter(getContext(), mHomeViewModel);
-
-
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,16 +51,7 @@ public class HomeFragment extends Fragment {
         setupNewestList();
         setupMostVisitedList();
         setupMostPopularList();
-
-
-        mHomeViewModel.getProductLiveData().observe(getViewLifecycleOwner(), new Observer<Product>() {
-            @Override
-            public void onChanged(Product product) {
-                mNavController.navigate(R.id.action_navigation_home_to_productDetailFragment);
-            }
-        });
-
-
+        onNewestListItemSelected();
         return mFragmentHomeBinding.getRoot();
     }
 
@@ -74,7 +62,6 @@ public class HomeFragment extends Fragment {
     }
 
     private void setupNewestList() {
-        Log.d("tag", "setupNewestList");
         mLiveDataListNewest = mHomeViewModel.getLiveDataNewestList();
         mFragmentHomeBinding.recyclerViewNewest.setLayoutManager(new LinearLayoutManager(getContext(),
                 LinearLayoutManager.HORIZONTAL,
@@ -84,13 +71,11 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(List<Product> products) {
                 mProductAdapterNewest.setProductList(products);
-                mProductAdapterNewest.notifyDataSetChanged();
             }
         });
     }
 
     private void setupMostVisitedList() {
-        Log.d("tag", "setupMostVisitedList");
         mLiveDataListMostVisited = mHomeViewModel.getLiveDataMostVisitedList();
         mFragmentHomeBinding.recyclerViewMostVisited.setLayoutManager(new LinearLayoutManager(getContext(),
                 LinearLayoutManager.HORIZONTAL,
@@ -100,13 +85,11 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(List<Product> products) {
                 mProductAdapterMostVisited.setProductList(products);
-                mProductAdapterMostVisited.notifyDataSetChanged();
             }
         });
     }
 
     private void setupMostPopularList() {
-        Log.d("tag", "setupMostPopularList");
         mLiveDataListMostPopular = mHomeViewModel.getLiveDataMostPopularList();
         mFragmentHomeBinding.recyclerViewMostPopular.setLayoutManager(new LinearLayoutManager(getContext(),
                 LinearLayoutManager.HORIZONTAL,
@@ -116,7 +99,18 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(List<Product> products) {
                 mProductAdapterMostPopular.setProductList(products);
-                mProductAdapterMostPopular.notifyDataSetChanged();
+            }
+        });
+    }
+
+    private void onNewestListItemSelected() {
+        mHomeViewModel.getLiveDataProduct().observe(getViewLifecycleOwner(), new Observer<Product>() {
+            @Override
+            public void onChanged(Product product) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("product", product);
+                mNavController.navigate(R.id.action_navigation_home_to_productDetailFragment, bundle);
+
             }
         });
     }

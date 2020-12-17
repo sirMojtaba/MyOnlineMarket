@@ -31,11 +31,7 @@
         android:name="com.example.myonlinemarket.ui.ProductDetailFragment"
         android:label="ProductDetailFragment" >
         <argument
-            android:name="productId"
-            app:argType="integer"
-            android:defaultValue="0" />
-        <action
-            android:id="@+id/action_productDetailFragment_to_navigation_home"
-            app:destination="@id/navigation_home" />
+            android:name="product"
+            app:argType="com.example.myonlinemarket.model.Product" />
     </fragment>
 </navigation>

@@ -1,6 +1,6 @@
 package com.example.myonlinemarket.ui.home;
 
-import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -13,44 +13,36 @@ import java.util.List;
 
 public class HomeViewModel extends ViewModel {
 
+    private ProductRepository mProductRepository;
     private LiveData<List<Product>> mLiveDataNewestList;
     private LiveData<List<Product>> mLiveDataMostVisitedList;
     private LiveData<List<Product>> mLiveDataMostPopularList;
-    private MutableLiveData<Product> mProductLiveData = new MutableLiveData<>();
-    private ProductRepository mProductRepository;
+    private MutableLiveData<Product> mLiveDataProduct = new MutableLiveData<>();
 
     public HomeViewModel() {
         mProductRepository = ProductRepository.getProductRepository();
     }
 
     public LiveData<List<Product>> getLiveDataNewestList() {
-        Log.d("tag2", "getLiveDataNewestList");
         mLiveDataNewestList = mProductRepository.getLiveDataNewestList();
         return mLiveDataNewestList;
     }
 
     public LiveData<List<Product>> getLiveDataMostVisitedList() {
-        Log.d("tag2", "getLiveDataMostVisitedList");
         mLiveDataMostVisitedList = mProductRepository.getLiveDataMostVisitedList();
         return mLiveDataMostVisitedList;
     }
 
     public LiveData<List<Product>> getLiveDataMostPopularList() {
-        Log.d("tag2", "getLiveDataMostPopularList");
         mLiveDataMostPopularList = mProductRepository.getLiveDataMostPopularList();
         return mLiveDataMostPopularList;
     }
 
-    public MutableLiveData<Product> getProductLiveData() {
-        return mProductLiveData;
-    }
-
-    public void setProductLiveData(MutableLiveData<Product> productLiveData) {
-        mProductLiveData = productLiveData;
+    public MutableLiveData<Product> getLiveDataProduct() {
+        return mLiveDataProduct;
     }
 
     public void onItemSelected(int position){
-        mProductLiveData.setValue(mLiveDataNewestList.getValue().get(position));
-
+        mLiveDataProduct.setValue(mLiveDataNewestList.getValue().get(position));
     }
 }

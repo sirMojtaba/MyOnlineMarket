@@ -23,6 +23,7 @@ public class GetProductListDeserializer implements JsonDeserializer<List<Product
             JsonObject productObject = body.get(i).getAsJsonObject();
             String name = productObject.get("name").getAsString();
             String price = productObject.get("price").getAsString();
+            String description = productObject.get("description").getAsString();
             JsonArray images = productObject.get("images").getAsJsonArray();
 
             List<String> imageUrlList = new ArrayList<>();
@@ -32,7 +33,7 @@ public class GetProductListDeserializer implements JsonDeserializer<List<Product
                 imageUrlList.add(url);
             }
 
-            Product product = new Product(name, price, imageUrlList);
+            Product product = new Product(name, description, price, imageUrlList);
             productList.add(product);
         }
 
