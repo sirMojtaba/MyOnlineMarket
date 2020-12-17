@@ -5,7 +5,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -25,7 +26,8 @@
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:fontFamily="@font/byekan"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_newest"
@@ -50,7 +52,8 @@
                 app:layout_constraintBottom_toTopOf="@+id/recycler_view_most_visited"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recycler_view_newest" />
+                app:layout_constraintTop_toBottomOf="@+id/recycler_view_newest"
+                android:fontFamily="@font/byekan"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_most_visited"
@@ -74,7 +77,8 @@
                 app:layout_constraintBottom_toTopOf="@+id/recycler_view_most_popular"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recycler_view_most_visited" />
+                app:layout_constraintTop_toBottomOf="@+id/recycler_view_most_visited"
+                android:fontFamily="@font/byekan"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_most_popular"
