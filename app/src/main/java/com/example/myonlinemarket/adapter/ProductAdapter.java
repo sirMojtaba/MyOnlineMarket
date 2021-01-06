@@ -38,7 +38,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         RecyclerItemBinding recyclerItemBinding = DataBindingUtil.inflate(
                 LayoutInflater.from(mContext),
-                R.layout.recycler_item,
+                R.layout.product_recycler_item,
                 parent,
                 false);
         return new ProductViewHolder(recyclerItemBinding);
