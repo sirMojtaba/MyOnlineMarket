@@ -1,6 +1,6 @@
 package com.example.myonlinemarket.model;
 
-public class Category {
+public class ProductCategories {
 
     private String mName;
     private int mId;
@@ -30,7 +30,7 @@ public class Category {
         mParentId = parentId;
     }
 
-    public Category(String name, int id, int parentId) {
+    public ProductCategories(String name, int id, int parentId) {
         mName = name;
         mId = id;
         mParentId = parentId;

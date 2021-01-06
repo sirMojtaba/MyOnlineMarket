@@ -1,13 +1,11 @@
 package com.example.myonlinemarket.repository;
 
-import android.util.Log;
-
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.myonlinemarket.model.Product;
 import com.example.myonlinemarket.network.GetProductListDeserializer;
 import com.example.myonlinemarket.network.NetworkParameters;
-import com.example.myonlinemarket.network.ProductService;
+import com.example.myonlinemarket.network.AppService;
 import com.example.myonlinemarket.network.RetrofitInstance;
 import com.google.gson.reflect.TypeToken;
 
@@ -29,7 +27,7 @@ public class ProductRepository {
         return sProductRepository;
     }
 
-    private ProductService mProductService;
+    private AppService mAppService;
     private MutableLiveData<List<Product>> mLiveDataNewestList = new MutableLiveData<>();
     private MutableLiveData<List<Product>> mLiveDataMostVisitedList = new MutableLiveData<>();
     private MutableLiveData<List<Product>> mLiveDataMostPopularList = new MutableLiveData<>();
@@ -38,11 +36,11 @@ public class ProductRepository {
         Type type = new TypeToken<List<Product>>() {}.getType();
         Object typeAdapter = new GetProductListDeserializer();
         Retrofit retrofit = RetrofitInstance.getRetrofitInstance(type, typeAdapter);
-        mProductService = retrofit.create(ProductService.class);
+        mAppService = retrofit.create(AppService.class);
     }
 
     public MutableLiveData<List<Product>> getLiveDataNewestList() {
-        Call<List<Product>> call = mProductService.getProductList(NetworkParameters.queryNewestList);
+        Call<List<Product>> call = mAppService.getProductList(NetworkParameters.queryNewestList);
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
@@ -58,7 +56,7 @@ public class ProductRepository {
     }
 
     public MutableLiveData<List<Product>> getLiveDataMostVisitedList() {
-        Call<List<Product>> call = mProductService.getProductList(NetworkParameters.queryMostVisitedList);
+        Call<List<Product>> call = mAppService.getProductList(NetworkParameters.queryMostVisitedList);
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
@@ -74,7 +72,7 @@ public class ProductRepository {
     }
 
     public MutableLiveData<List<Product>> getLiveDataMostPopularList() {
-        Call<List<Product>> call = mProductService.getProductList(NetworkParameters.queryRatingList);
+        Call<List<Product>> call = mAppService.getProductList(NetworkParameters.queryRatingList);
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {

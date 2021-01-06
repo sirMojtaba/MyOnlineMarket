@@ -4,22 +4,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavAction;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
 import com.example.myonlinemarket.R;
-import com.example.myonlinemarket.databinding.FragmentCartBinding;
-import com.example.myonlinemarket.network.ProductService;
-import com.example.myonlinemarket.network.RetrofitInstance;
 
 public class CartFragment extends Fragment {
 
