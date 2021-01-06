@@ -4,9 +4,7 @@ import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +13,6 @@ import com.example.myonlinemarket.R;
 import com.example.myonlinemarket.adapter.SliderAdapter;
 import com.example.myonlinemarket.databinding.FragmentProductDetailBinding;
 import com.example.myonlinemarket.model.Product;
-import com.example.myonlinemarket.ui.home.HomeViewModel;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 
@@ -53,10 +50,8 @@ public class ProductDetailFragment extends Fragment {
     }
 
     private void setupImageSlider() {
-        mBinding.imageSlider.setSliderAdapter(new SliderAdapter(getContext(), mProduct.getURL()));
+        mBinding.imageSlider.setSliderAdapter(new SliderAdapter(getContext(), mProduct.getImageUrls()));
         mBinding.imageSlider.setIndicatorAnimation(IndicatorAnimationType.SCALE);
         mBinding.imageSlider.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
     }
-
-
 }

@@ -71,7 +71,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             mRecyclerItemBinding.textViewTitle.setText(mProduct.getName());
             mRecyclerItemBinding.textViewPrice.setText(mProduct.getPrice() + " تومان");
             Picasso.get()
-                    .load(mProduct.getURL().get(0))
+                    .load(mProduct.getImageUrls().get(0))
                     .fit()
                     .centerInside()
                     .into(mRecyclerItemBinding.imageView);

@@ -9,7 +9,7 @@ public class Product implements Serializable {
     private String mName;
     private String mDescription;
     private String mPrice;
-    private List<String> mURL;
+    private List<String> mImageUrls;
 
     public String getName() {
         return mName;
@@ -27,12 +27,12 @@ public class Product implements Serializable {
         mPrice = price;
     }
 
-    public List<String> getURL() {
-        return mURL;
+    public List<String> getImageUrls() {
+        return mImageUrls;
     }
 
-    public void setURL(List<String> URL) {
-        mURL = URL;
+    public void setImageUrls(List<String> imageUrls) {
+        mImageUrls = imageUrls;
     }
 
     public String getDescription() {
@@ -43,10 +43,10 @@ public class Product implements Serializable {
         mDescription = description;
     }
 
-    public Product(String name, String description, String price, List<String> URL) {
+    public Product(String name, String description, String price, List<String> ImageUrls) {
         mName = name;
         mDescription = description;
         mPrice = price;
-        mURL = URL;
+        mImageUrls = ImageUrls;
     }
 }
