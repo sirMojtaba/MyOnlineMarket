@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,32 +26,83 @@ public class CategoriesFragment extends Fragment {
 
     private CategoriesViewModel mCategoriesViewModel;
     private FragmentCategoriesBinding mBinding;
-    private CategoryAdapter mAdapter;
-    private LiveData<List<ProductCategories>> mListDigital;
-//    private List<ProductCategories> mListClothes;
-//    private List<ProductCategories> mListBook;
-//    private List<ProductCategories> mListFood;
+    private CategoryAdapter mDigitalAdapter;
+    private CategoryAdapter mClothesAdapter;
+    private CategoryAdapter mBookAdapter;
+    private CategoryAdapter mFoodAdapter;
+    private LiveData<List<ProductCategories>> mDigitalList;
+    private LiveData<List<ProductCategories>> mClothesList;
+    private LiveData<List<ProductCategories>> mBookList;
+    private LiveData<List<ProductCategories>> mFoodList;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mCategoriesViewModel = new ViewModelProvider(this).get(CategoriesViewModel.class);
-        mAdapter = new CategoryAdapter(getContext());
+        mDigitalAdapter = new CategoryAdapter(getContext());
+        mClothesAdapter = new CategoryAdapter(getContext());
+        mBookAdapter = new CategoryAdapter(getContext());
+        mFoodAdapter = new CategoryAdapter(getContext());
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_categories, container, false);
-        mListDigital = mCategoriesViewModel.getListDigital();
+        setupDigitalList();
+        setupClothesList();
+        setupBooklList();
+        setupFoodList();
+        return mBinding.getRoot();
+    }
+
+    private void setupDigitalList() {
+        mDigitalList = mCategoriesViewModel.getDigitalList();
         mBinding.recyclerViewDigital.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, true));
-        mBinding.recyclerViewDigital.setAdapter(mAdapter);
-        mListDigital.observe(getViewLifecycleOwner(), new Observer<List<ProductCategories>>() {
+        mBinding.recyclerViewDigital.setAdapter(mDigitalAdapter);
+        mDigitalList.observe(getViewLifecycleOwner(), new Observer<List<ProductCategories>>() {
             @Override
             public void onChanged(List<ProductCategories> productCategories) {
-                mAdapter.setCategoryList(productCategories);
+                mDigitalAdapter.setCategoryList(productCategories);
 
             }
         });
-        return mBinding.getRoot();
+    }
+
+    private void setupClothesList() {
+        mClothesList = mCategoriesViewModel.getClothesList();
+        mBinding.recyclerViewClothes.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, true));
+        mBinding.recyclerViewClothes.setAdapter(mClothesAdapter);
+        mClothesList.observe(getViewLifecycleOwner(), new Observer<List<ProductCategories>>() {
+            @Override
+            public void onChanged(List<ProductCategories> productCategories) {
+                mClothesAdapter.setCategoryList(productCategories);
+
+            }
+        });
+    }
+
+    private void setupBooklList() {
+        mBookList = mCategoriesViewModel.getBookList();
+        mBinding.recyclerViewBook.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, true));
+        mBinding.recyclerViewBook.setAdapter(mBookAdapter);
+        mBookList.observe(getViewLifecycleOwner(), new Observer<List<ProductCategories>>() {
+            @Override
+            public void onChanged(List<ProductCategories> productCategories) {
+                mBookAdapter.setCategoryList(productCategories);
+
+            }
+        });
+    }
+
+    private void setupFoodList() {
+        mFoodList = mCategoriesViewModel.getFoodList();
+        mBinding.recyclerViewFood.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, true));
+        mBinding.recyclerViewFood.setAdapter(mFoodAdapter);
+        mFoodList.observe(getViewLifecycleOwner(), new Observer<List<ProductCategories>>() {
+            @Override
+            public void onChanged(List<ProductCategories> productCategories) {
+                mFoodAdapter.setCategoryList(productCategories);
+
+            }
+        });
     }
 }

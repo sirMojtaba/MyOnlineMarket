@@ -20,6 +20,11 @@ import retrofit2.Retrofit;
 public class CategoryRepository {
 
     private static CategoryRepository sRepository;
+    private AppService mAppService;
+    private MutableLiveData<List<ProductCategories>> mLiveDataDigital = new MutableLiveData<>();
+    private MutableLiveData<List<ProductCategories>> mLiveDataClothes = new MutableLiveData<>();
+    private MutableLiveData<List<ProductCategories>> mLiveDataBook = new MutableLiveData<>();
+    private MutableLiveData<List<ProductCategories>> mLiveDataFood = new MutableLiveData<>();
 
     public static CategoryRepository getInstance() {
         if (sRepository == null) {
@@ -29,22 +34,20 @@ public class CategoryRepository {
     }
 
     private CategoryRepository() {
-        Type type = new TypeToken<List<ProductCategories>>(){}.getType();
+        Type type = new TypeToken<List<ProductCategories>>() {
+        }.getType();
         Object object = new CategoryDeserializer();
         Retrofit retrofit = RetrofitInstance.getRetrofitInstance(type, object);
         mAppService = retrofit.create(AppService.class);
     }
 
-    private MutableLiveData<List<ProductCategories>> mLiveDataCategoryDigital = new MutableLiveData<>();
-    private AppService mAppService;
-
-    public MutableLiveData<List<ProductCategories>> getLiveDataCategoryDigital() {
+    public MutableLiveData<List<ProductCategories>> getLiveDataDigital() {
         Call<List<ProductCategories>> call = mAppService.getCategories(NetworkParameters.queryDigitalCategoryList,
-                NetworkParameters.DIGITAL_CATEGORY_ID);
+                NetworkParameters.DIGITAL_ID);
         call.enqueue(new Callback<List<ProductCategories>>() {
             @Override
             public void onResponse(Call<List<ProductCategories>> call, Response<List<ProductCategories>> response) {
-                mLiveDataCategoryDigital.setValue(response.body());
+                mLiveDataDigital.setValue(response.body());
             }
 
             @Override
@@ -52,6 +55,57 @@ public class CategoryRepository {
 
             }
         });
-        return mLiveDataCategoryDigital;
+        return mLiveDataDigital;
+    }
+
+    public MutableLiveData<List<ProductCategories>> getLiveDataClothes() {
+        Call<List<ProductCategories>> call = mAppService.getCategories(NetworkParameters.queryDigitalCategoryList,
+                NetworkParameters.CLOTHES_ID);
+        call.enqueue(new Callback<List<ProductCategories>>() {
+            @Override
+            public void onResponse(Call<List<ProductCategories>> call, Response<List<ProductCategories>> response) {
+                mLiveDataClothes.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<ProductCategories>> call, Throwable t) {
+
+            }
+        });
+        return mLiveDataClothes;
+    }
+
+    public MutableLiveData<List<ProductCategories>> getLiveDataBook() {
+        Call<List<ProductCategories>> call = mAppService.getCategories(NetworkParameters.queryDigitalCategoryList,
+                NetworkParameters.BOOK_ID);
+        call.enqueue(new Callback<List<ProductCategories>>() {
+            @Override
+            public void onResponse(Call<List<ProductCategories>> call, Response<List<ProductCategories>> response) {
+                mLiveDataBook.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<ProductCategories>> call, Throwable t) {
+
+            }
+        });
+        return mLiveDataBook;
+    }
+
+    public MutableLiveData<List<ProductCategories>> getLiveDataFood() {
+        Call<List<ProductCategories>> call = mAppService.getCategories(NetworkParameters.queryDigitalCategoryList,
+                NetworkParameters.FOOD_ID);
+        call.enqueue(new Callback<List<ProductCategories>>() {
+            @Override
+            public void onResponse(Call<List<ProductCategories>> call, Response<List<ProductCategories>> response) {
+                mLiveDataFood.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<ProductCategories>> call, Throwable t) {
+
+            }
+        });
+        return mLiveDataFood;
     }
 }

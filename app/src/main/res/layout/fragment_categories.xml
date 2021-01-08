@@ -11,22 +11,24 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/text_view_digital"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/byekan"
                 android:padding="8dp"
                 android:text="کالای دیجیتال"
                 android:textAlignment="viewEnd"
                 android:textColor="#000000"
                 android:textDirection="rtl"
-                android:textSize="18sp"
+                android:textSize="14sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:fontFamily="@font/byekan"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_digital"
@@ -43,7 +45,8 @@
                 android:textAlignment="viewEnd"
                 android:textColor="#000000"
                 android:textDirection="rtl"
-                android:textSize="18sp"
+                android:textSize="14sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/recycler_view_digital"
@@ -52,7 +55,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_clothes"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="180dp"
                 app:layout_constraintTop_toBottomOf="@id/text_view_clothes"
                 tools:layout_editor_absoluteX="0dp" />
 
@@ -60,21 +63,22 @@
                 android:id="@+id/text_view_book"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/byekan"
                 android:padding="8dp"
                 android:text="کتاب، لوازم التحریر و هنر"
                 android:textAlignment="viewEnd"
                 android:textColor="#000000"
                 android:textDirection="rtl"
-                android:textSize="18sp"
+                android:textSize="14sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/recycler_view_clothes"
-                android:fontFamily="@font/byekan"/>
+                app:layout_constraintTop_toBottomOf="@id/recycler_view_clothes" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_book"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="180dp"
                 app:layout_constraintTop_toBottomOf="@id/text_view_book" />
 
             <TextView
@@ -86,7 +90,8 @@
                 android:textAlignment="viewEnd"
                 android:textColor="#000000"
                 android:textDirection="rtl"
-                android:textSize="18sp"
+                android:textSize="14sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/recycler_view_book"
@@ -95,7 +100,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_food"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="180dp"
                 app:layout_constraintTop_toBottomOf="@id/text_view_food" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
