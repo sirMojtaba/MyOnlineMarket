@@ -26,4 +26,10 @@ public class NetworkParameters {
         put("consumer_secret", CONSUMER_SECRET);
         put("orderby", "rating");
     }};
+
+    public static Map<String, String> queryDigitalCategoryList = new HashMap<String, String>() {{
+        put("consumer_key", CONSUMER_KEY);
+        put("consumer_secret", CONSUMER_SECRET);
+        put("parent", "52");
+    }};
 }

@@ -1,19 +1,25 @@
 package com.example.myonlinemarket.ui.category;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import com.example.myonlinemarket.model.ProductCategories;
+import com.example.myonlinemarket.repository.CategoryRepository;
+import com.example.myonlinemarket.repository.ProductRepository;
+
+import java.util.List;
 
 public class CategoriesViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private LiveData<List<ProductCategories>> mListDigital;
+    private CategoryRepository mRepository;
 
     public CategoriesViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        mRepository = CategoryRepository.getInstance();
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<List<ProductCategories>> getListDigital() {
+        mListDigital = mRepository.getLiveDataCategoryDigital();
+        return mListDigital;
     }
 }

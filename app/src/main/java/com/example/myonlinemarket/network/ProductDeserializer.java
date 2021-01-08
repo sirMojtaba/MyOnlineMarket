@@ -12,7 +12,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetProductListDeserializer implements JsonDeserializer<List<Product>> {
+public class ProductDeserializer implements JsonDeserializer<List<Product>> {
     @Override
     public List<Product> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 

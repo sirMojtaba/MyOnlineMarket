@@ -14,6 +14,6 @@ public interface AppService {
     @GET("products")
     Call<List<Product>> getProductList(@QueryMap Map<String, String> options);
 
-    @GET("categories")
+    @GET("products/categories")
     Call<List<ProductCategories>> getCategories(@QueryMap Map<String, String> options);
 }

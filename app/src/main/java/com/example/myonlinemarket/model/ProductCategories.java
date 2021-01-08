@@ -3,8 +3,8 @@ package com.example.myonlinemarket.model;
 public class ProductCategories {
 
     private String mName;
-    private int mId;
-    private int mParentId;
+    private String mId;
+    private String mParentId;
 
     public String getName() {
         return mName;
@@ -14,23 +14,23 @@ public class ProductCategories {
         mName = name;
     }
 
-    public int getId() {
+    public String getId() {
         return mId;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         mId = id;
     }
 
-    public int getParentId() {
+    public String getParentId() {
         return mParentId;
     }
 
-    public void setParentId(int parentId) {
+    public void setParentId(String parentId) {
         mParentId = parentId;
     }
 
-    public ProductCategories(String name, int id, int parentId) {
+    public ProductCategories(String name, String id, String parentId) {
         mName = name;
         mId = id;
         mParentId = parentId;

@@ -3,7 +3,8 @@ package com.example.myonlinemarket.repository;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.myonlinemarket.model.Product;
-import com.example.myonlinemarket.network.GetProductListDeserializer;
+import com.example.myonlinemarket.model.ProductCategories;
+import com.example.myonlinemarket.network.ProductDeserializer;
 import com.example.myonlinemarket.network.NetworkParameters;
 import com.example.myonlinemarket.network.AppService;
 import com.example.myonlinemarket.network.RetrofitInstance;
@@ -31,11 +32,13 @@ public class ProductRepository {
     private MutableLiveData<List<Product>> mLiveDataNewestList = new MutableLiveData<>();
     private MutableLiveData<List<Product>> mLiveDataMostVisitedList = new MutableLiveData<>();
     private MutableLiveData<List<Product>> mLiveDataMostPopularList = new MutableLiveData<>();
+    private MutableLiveData<List<ProductCategories>> mLiveDataDigitalList = new MutableLiveData<>();
 
     private ProductRepository() {
-        Type type = new TypeToken<List<Product>>() {}.getType();
-        Object typeAdapter = new GetProductListDeserializer();
-        Retrofit retrofit = RetrofitInstance.getRetrofitInstance(type, typeAdapter);
+        Type type = new TypeToken<List<Product>>() {
+        }.getType();
+        Object productTypeAdapter = new ProductDeserializer();
+        Retrofit retrofit = RetrofitInstance.getRetrofitInstance(type, productTypeAdapter);
         mAppService = retrofit.create(AppService.class);
     }
 
@@ -86,4 +89,20 @@ public class ProductRepository {
         });
         return mLiveDataMostPopularList;
     }
+
+    /*public MutableLiveData<List<ProductCategories>> getLiveDataDigitalList() {
+        Call<List<ProductCategories>> call = mCategoryAppService.getCategories(NetworkParameters.queryDigitalCategoryList);
+        call.enqueue(new Callback<List<ProductCategories>>() {
+            @Override
+            public void onResponse(Call<List<ProductCategories>> call, Response<List<ProductCategories>> response) {
+                mLiveDataDigitalList.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<ProductCategories>> call, Throwable t) {
+
+            }
+        });
+        return mLiveDataDigitalList;
+    }*/
 }

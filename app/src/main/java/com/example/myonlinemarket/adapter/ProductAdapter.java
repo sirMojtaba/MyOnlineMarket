@@ -8,9 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myonlinemarket.databinding.ProductListItemBinding;
 import com.example.myonlinemarket.model.Product;
 import com.example.myonlinemarket.R;
-import com.example.myonlinemarket.databinding.RecyclerItemBinding;
 import com.example.myonlinemarket.ui.home.HomeViewModel;
 import com.squareup.picasso.Picasso;
 
@@ -36,12 +36,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        RecyclerItemBinding recyclerItemBinding = DataBindingUtil.inflate(
+        ProductListItemBinding binding = DataBindingUtil.inflate(
                 LayoutInflater.from(mContext),
-                R.layout.product_recycler_item,
+                R.layout.product_list_item,
                 parent,
                 false);
-        return new ProductViewHolder(recyclerItemBinding);
+        return new ProductViewHolder(binding);
     }
 
     @Override
@@ -55,26 +55,26 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     }
 
     public class ProductViewHolder extends RecyclerView.ViewHolder {
-        private RecyclerItemBinding mRecyclerItemBinding;
+        private ProductListItemBinding mBinding;
         private Product mProduct;
 
-        public ProductViewHolder(RecyclerItemBinding recyclerItemBinding) {
-            super(recyclerItemBinding.getRoot());
-            mRecyclerItemBinding = recyclerItemBinding;
-            mRecyclerItemBinding.setViewmodel(mHomeViewModel);
+        public ProductViewHolder(ProductListItemBinding binding) {
+            super(binding.getRoot());
+            mBinding = binding;
+            mBinding.setViewmodel(mHomeViewModel);
         }
 
         private void bindProduct(int position) {
-            mRecyclerItemBinding.setPosition(position);
-            mRecyclerItemBinding.executePendingBindings();
+            mBinding.setPosition(position);
+            mBinding.executePendingBindings();
             mProduct = mProductList.get(position);
-            mRecyclerItemBinding.textViewTitle.setText(mProduct.getName());
-            mRecyclerItemBinding.textViewPrice.setText(mProduct.getPrice() + " تومان");
+            mBinding.textViewTitle.setText(mProduct.getName());
+            mBinding.textViewPrice.setText(mProduct.getPrice() + " تومان");
             Picasso.get()
                     .load(mProduct.getImageUrls().get(0))
                     .fit()
                     .centerInside()
-                    .into(mRecyclerItemBinding.imageView);
+                    .into(mBinding.imageView);
         }
     }
 }
