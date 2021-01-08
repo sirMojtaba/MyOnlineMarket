@@ -8,12 +8,14 @@ import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
 public interface AppService {
+
     @GET("products")
     Call<List<Product>> getProductList(@QueryMap Map<String, String> options);
 
     @GET("products/categories")
-    Call<List<ProductCategories>> getCategories(@QueryMap Map<String, String> options);
+    Call<List<ProductCategories>> getCategories(@QueryMap Map<String, String> options, @Query("parent") int parent);
 }

@@ -31,9 +31,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_digital"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                app:layout_constraintTop_toBottomOf="@id/text_view_digital">
-            </androidx.recyclerview.widget.RecyclerView>
+                android:layout_height="180dp"
+                app:layout_constraintTop_toBottomOf="@id/text_view_digital"></androidx.recyclerview.widget.RecyclerView>
 
             <TextView
                 android:id="@+id/text_view_clothes"

@@ -39,7 +39,8 @@ public class CategoryRepository {
     private AppService mAppService;
 
     public MutableLiveData<List<ProductCategories>> getLiveDataCategoryDigital() {
-        Call<List<ProductCategories>> call = mAppService.getCategories(NetworkParameters.queryDigitalCategoryList);
+        Call<List<ProductCategories>> call = mAppService.getCategories(NetworkParameters.queryDigitalCategoryList,
+                NetworkParameters.DIGITAL_CATEGORY_ID);
         call.enqueue(new Callback<List<ProductCategories>>() {
             @Override
             public void onResponse(Call<List<ProductCategories>> call, Response<List<ProductCategories>> response) {

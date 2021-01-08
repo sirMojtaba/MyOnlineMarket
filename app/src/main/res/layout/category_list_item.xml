@@ -7,16 +7,17 @@
 
     <RelativeLayout
         android:id="@+id/layout_item"
-        android:layout_width="150dp"
-        android:layout_height="280dp"
+        android:layout_width="100dp"
+        android:layout_height="160dp"
         android:layout_margin="8dp"
         android:background="@drawable/background_category_list_item"
         android:gravity="center"
         android:padding="8dp">
+
         <ImageView
             android:id="@+id/image_view"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="100dp"
             android:layout_alignParentTop="true" />
 
         <TextView
@@ -28,8 +29,8 @@
             android:fontFamily="@font/byekan"
             android:gravity="start"
             android:text="چاقو سفری توماهاوک مدل x255"
-            android:textColor="#000000"
-            android:textDirection="rtl"
+            android:textAlignment="center"
+            android:textColor="#74797F"
             android:textSize="12sp"
             android:textStyle="bold" />
 

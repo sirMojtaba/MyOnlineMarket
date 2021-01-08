@@ -3,8 +3,9 @@ package com.example.myonlinemarket.model;
 public class ProductCategories {
 
     private String mName;
-    private String mId;
-    private String mParentId;
+    private int mId;
+    private int mParentId;
+    private String mImageUrl;
 
     public String getName() {
         return mName;
@@ -14,25 +15,34 @@ public class ProductCategories {
         mName = name;
     }
 
-    public String getId() {
+    public int getId() {
         return mId;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         mId = id;
     }
 
-    public String getParentId() {
+    public int getParentId() {
         return mParentId;
     }
 
-    public void setParentId(String parentId) {
+    public void setParentId(int parentId) {
         mParentId = parentId;
     }
 
-    public ProductCategories(String name, String id, String parentId) {
+    public String getImageUrl() {
+        return mImageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        mImageUrl = imageUrl;
+    }
+
+    public ProductCategories(String name, int id, int parentId, String imageUrl) {
         mName = name;
         mId = id;
         mParentId = parentId;
+        mImageUrl = imageUrl;
     }
 }

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myonlinemarket.R;
 import com.example.myonlinemarket.databinding.CategoryListItemBinding;
 import com.example.myonlinemarket.model.ProductCategories;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +45,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
 
         holder.mBinding.textViewTitle.setText(mCategoryList.get(position).getName());
-
+        Picasso.get()
+                .load(mCategoryList.get(position).getImageUrl())
+                .fit()
+                .centerInside()
+                .into(holder.mBinding.imageView);
     }
 
     @Override
