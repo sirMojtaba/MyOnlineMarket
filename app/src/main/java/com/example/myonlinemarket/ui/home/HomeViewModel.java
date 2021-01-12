@@ -1,5 +1,9 @@
 package com.example.myonlinemarket.ui.home;
 
+import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -7,6 +11,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.myonlinemarket.model.Product;
 import com.example.myonlinemarket.repository.ProductRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeViewModel extends ViewModel {
@@ -18,7 +23,7 @@ public class HomeViewModel extends ViewModel {
     private MutableLiveData<Product> mLiveDataProduct = new MutableLiveData<>();
 
     public HomeViewModel() {
-        mProductRepository = ProductRepository.getProductRepository();
+        mProductRepository = ProductRepository.getInstance();
     }
 
     public LiveData<List<Product>> getLiveDataNewestList() {

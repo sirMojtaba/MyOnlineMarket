@@ -1,6 +1,7 @@
 package com.example.myonlinemarket.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,81 +26,117 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    private FragmentHomeBinding mFragmentHomeBinding;
+    private FragmentHomeBinding mBinding;
     private HomeViewModel mHomeViewModel;
     private ProductAdapter mProductAdapterNewest;
     private ProductAdapter mProductAdapterMostVisited;
     private ProductAdapter mProductAdapterMostPopular;
+    private NavController mNavController;
     private LiveData<List<Product>> mLiveDataListNewest;
     private LiveData<List<Product>> mLiveDataListMostVisited;
     private LiveData<List<Product>> mLiveDataListMostPopular;
-    private NavController mNavController;
+    public static final int NEWEST_LIST_NUMBER = 0;
+    public static final int MOST_VISITED_LIST_NUMBER = 1;
+    public static final int MOST_POPULAR_LIST_NUMBER = 2;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mHomeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        mProductAdapterNewest = new ProductAdapter(getContext(), mHomeViewModel);
-        mProductAdapterMostVisited = new ProductAdapter(getContext(), mHomeViewModel);
-        mProductAdapterMostPopular = new ProductAdapter(getContext(), mHomeViewModel);
+        /*mProductAdapterNewest = new ProductAdapter(this, mHomeViewModel);
+        mProductAdapterMostVisited = new ProductAdapter(this, mHomeViewModel);
+        mProductAdapterMostPopular = new ProductAdapter(this, mHomeViewModel);*/
+        Log.d("tag", "home fragment onCreate");
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mFragmentHomeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
         setupNewestList();
         setupMostVisitedList();
         setupMostPopularList();
         onNewestListItemSelected();
-        return mFragmentHomeBinding.getRoot();
+        Log.d("tag", "home fragment onCreateView");
+        return mBinding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mNavController = Navigation.findNavController(view);
+        Log.d("tag", "home fragment onViewCreated");
     }
 
     private void setupNewestList() {
         mLiveDataListNewest = mHomeViewModel.getLiveDataNewestList();
-        mFragmentHomeBinding.recyclerViewNewest.setLayoutManager(new LinearLayoutManager(getContext(),
+        mBinding.recyclerViewNewest.setLayoutManager(new LinearLayoutManager(getContext(),
                 LinearLayoutManager.HORIZONTAL,
                 true));
-        mFragmentHomeBinding.recyclerViewNewest.setAdapter(mProductAdapterNewest);
+//        mBinding.recyclerViewNewest.setAdapter(mProductAdapterNewest);
         mLiveDataListNewest.observe(getViewLifecycleOwner(), new Observer<List<Product>>() {
             @Override
             public void onChanged(List<Product> products) {
-                mProductAdapterNewest.setProductList(products);
+//                mProductAdapterNewest.setProductList(products);
+                setNewestAdapter(products);
             }
         });
+    }
+
+    private void setNewestAdapter(List<Product> products) {
+        if (mProductAdapterNewest == null) {
+            mProductAdapterNewest = new ProductAdapter(getContext(), mHomeViewModel, NEWEST_LIST_NUMBER);
+            mBinding.recyclerViewNewest.setAdapter(mProductAdapterNewest);
+        }
+        mProductAdapterNewest.setProductList(products);
+        mProductAdapterNewest.notifyDataSetChanged();
     }
 
     private void setupMostVisitedList() {
         mLiveDataListMostVisited = mHomeViewModel.getLiveDataMostVisitedList();
-        mFragmentHomeBinding.recyclerViewMostVisited.setLayoutManager(new LinearLayoutManager(getContext(),
+        mBinding.recyclerViewMostVisited.setLayoutManager(new LinearLayoutManager(getContext(),
                 LinearLayoutManager.HORIZONTAL,
                 true));
-        mFragmentHomeBinding.recyclerViewMostVisited.setAdapter(mProductAdapterMostVisited);
+//        mBinding.recyclerViewMostVisited.setAdapter(mProductAdapterMostVisited);
         mLiveDataListMostVisited.observe(getViewLifecycleOwner(), new Observer<List<Product>>() {
             @Override
             public void onChanged(List<Product> products) {
-                mProductAdapterMostVisited.setProductList(products);
+//                mProductAdapterMostVisited.setProductList(products);
+                setMostVisitedAdapter();
             }
         });
     }
 
+    private void setMostVisitedAdapter() {
+        if (mProductAdapterMostVisited == null) {
+            mProductAdapterMostVisited = new ProductAdapter(getContext(), mHomeViewModel, MOST_VISITED_LIST_NUMBER);
+            mBinding.recyclerViewMostVisited.setAdapter(mProductAdapterMostVisited);
+        } else {
+            mProductAdapterMostVisited.notifyDataSetChanged();
+        }
+    }
+
     private void setupMostPopularList() {
         mLiveDataListMostPopular = mHomeViewModel.getLiveDataMostPopularList();
-        mFragmentHomeBinding.recyclerViewMostPopular.setLayoutManager(new LinearLayoutManager(getContext(),
+        mBinding.recyclerViewMostPopular.setLayoutManager(new LinearLayoutManager(getContext(),
                 LinearLayoutManager.HORIZONTAL,
                 true));
-        mFragmentHomeBinding.recyclerViewMostPopular.setAdapter(mProductAdapterMostPopular);
+//        mBinding.recyclerViewMostPopular.setAdapter(mProductAdapterMostPopular);
         mLiveDataListMostPopular.observe(getViewLifecycleOwner(), new Observer<List<Product>>() {
             @Override
             public void onChanged(List<Product> products) {
-                mProductAdapterMostPopular.setProductList(products);
+//                mProductAdapterMostPopular.setProductList(products);
+                setMostPopulardAdapter();
             }
         });
+    }
+
+    private void setMostPopulardAdapter() {
+        if (mProductAdapterMostPopular == null) {
+            mProductAdapterMostPopular = new ProductAdapter(getContext(), mHomeViewModel, MOST_POPULAR_LIST_NUMBER);
+            mBinding.recyclerViewMostPopular.setAdapter(mProductAdapterMostPopular);
+        } else {
+            mProductAdapterMostPopular.notifyDataSetChanged();
+        }
     }
 
     private void onNewestListItemSelected() {

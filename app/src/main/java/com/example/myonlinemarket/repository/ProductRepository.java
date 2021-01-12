@@ -1,12 +1,13 @@
 package com.example.myonlinemarket.repository;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.myonlinemarket.model.Product;
-import com.example.myonlinemarket.model.ProductCategories;
-import com.example.myonlinemarket.network.ProductDeserializer;
-import com.example.myonlinemarket.network.NetworkParameters;
 import com.example.myonlinemarket.network.AppService;
+import com.example.myonlinemarket.network.NetworkParameters;
+import com.example.myonlinemarket.network.ProductDeserializer;
 import com.example.myonlinemarket.network.RetrofitInstance;
 import com.google.gson.reflect.TypeToken;
 
@@ -20,26 +21,26 @@ import retrofit2.Retrofit;
 
 public class ProductRepository {
 
-    private static ProductRepository sProductRepository;
+    private static ProductRepository sRepository;
 
-    public static ProductRepository getProductRepository() {
-        if (sProductRepository == null)
-            sProductRepository = new ProductRepository();
-        return sProductRepository;
+    public static ProductRepository getInstance() {
+        if (sRepository == null)
+            sRepository = new ProductRepository();
+        return sRepository;
     }
 
     private AppService mAppService;
     private MutableLiveData<List<Product>> mLiveDataNewestList = new MutableLiveData<>();
     private MutableLiveData<List<Product>> mLiveDataMostVisitedList = new MutableLiveData<>();
     private MutableLiveData<List<Product>> mLiveDataMostPopularList = new MutableLiveData<>();
-    private MutableLiveData<List<ProductCategories>> mLiveDataDigitalList = new MutableLiveData<>();
 
     private ProductRepository() {
         Type type = new TypeToken<List<Product>>() {
         }.getType();
-        Object productTypeAdapter = new ProductDeserializer();
-        Retrofit retrofit = RetrofitInstance.getRetrofitInstance(type, productTypeAdapter);
+        Object object = new ProductDeserializer();
+        Retrofit retrofit = RetrofitInstance.getRetrofitInstance(type, object);
         mAppService = retrofit.create(AppService.class);
+        Log.d("tag", "product repository");
     }
 
     public MutableLiveData<List<Product>> getLiveDataNewestList() {
@@ -89,20 +90,4 @@ public class ProductRepository {
         });
         return mLiveDataMostPopularList;
     }
-
-    /*public MutableLiveData<List<ProductCategories>> getLiveDataDigitalList() {
-        Call<List<ProductCategories>> call = mCategoryAppService.getCategories(NetworkParameters.queryDigitalCategoryList);
-        call.enqueue(new Callback<List<ProductCategories>>() {
-            @Override
-            public void onResponse(Call<List<ProductCategories>> call, Response<List<ProductCategories>> response) {
-                mLiveDataDigitalList.setValue(response.body());
-            }
-
-            @Override
-            public void onFailure(Call<List<ProductCategories>> call, Throwable t) {
-
-            }
-        });
-        return mLiveDataDigitalList;
-    }*/
 }

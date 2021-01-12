@@ -2,15 +2,18 @@ package com.example.myonlinemarket.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myonlinemarket.R;
 import com.example.myonlinemarket.databinding.ProductListItemBinding;
 import com.example.myonlinemarket.model.Product;
-import com.example.myonlinemarket.R;
 import com.example.myonlinemarket.ui.home.HomeViewModel;
 import com.squareup.picasso.Picasso;
 
@@ -18,40 +21,68 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
-    private Context mContext;
+public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Product> mProductList = new ArrayList<>();
     private HomeViewModel mHomeViewModel;
+    private Context mContext;
+    public static final int ITEM_TYPE_ONE = 0;
+    public static final int ITEM_TYPE_TWO = 1;
+    private int mListNumber;
 
     public void setProductList(List<Product> productList) {
         mProductList = productList;
-        notifyDataSetChanged();
     }
 
-    public ProductAdapter(Context context, HomeViewModel homeViewModel) {
-        mContext = context.getApplicationContext();
+    public ProductAdapter(Context context, HomeViewModel homeViewModel, int listNumber) {
+        mContext = context;
         mHomeViewModel = homeViewModel;
+        mListNumber = listNumber;
     }
 
     @NonNull
     @Override
-    public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ProductListItemBinding binding = DataBindingUtil.inflate(
-                LayoutInflater.from(mContext),
-                R.layout.product_list_item,
-                parent,
-                false);
-        return new ProductViewHolder(binding);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        if (viewType == ITEM_TYPE_ONE) {
+            View view = LayoutInflater.from(mContext).inflate(R.layout.product_list_first_item, parent, false);
+            return new ImageViewHolder(view);
+        } else {
+            ProductListItemBinding binding = DataBindingUtil.inflate(
+                    LayoutInflater.from(mContext),
+                    R.layout.product_list_item,
+                    parent,
+                    false);
+            return new ProductViewHolder(binding);
+        }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        holder.bindProduct(position);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+
+        if (holder instanceof ImageViewHolder) {
+            if (mListNumber == 0)
+                ((ImageViewHolder) holder).mImageView.setBackgroundResource(R.drawable.ic_dashboard_black_24dp);
+            else if (mListNumber == 1)
+                ((ImageViewHolder) holder).mImageView.setBackgroundResource(R.drawable.ic_home_black_24dp);
+            else
+                ((ImageViewHolder) holder).mImageView.setBackgroundResource(R.drawable.ic_notifications_black_24dp);
+        } else {
+            ((ProductViewHolder) holder).bindProduct(position - 1);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 0) {
+            return ITEM_TYPE_ONE;
+        } else {
+            return ITEM_TYPE_TWO;
+        }
     }
 
     @Override
     public int getItemCount() {
-        return mProductList.size();
+        return (mProductList.size());
     }
 
     public class ProductViewHolder extends RecyclerView.ViewHolder {
@@ -75,6 +106,17 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                     .fit()
                     .centerInside()
                     .into(mBinding.imageView);
+        }
+    }
+
+    public class ImageViewHolder extends RecyclerView.ViewHolder {
+
+        private ImageView mImageView;
+
+        public ImageViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            mImageView = itemView.findViewById(R.id.image_view_first_item);
         }
     }
 }

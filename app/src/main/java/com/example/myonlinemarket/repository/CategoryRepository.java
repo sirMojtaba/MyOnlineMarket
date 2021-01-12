@@ -1,5 +1,7 @@
 package com.example.myonlinemarket.repository;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.myonlinemarket.model.ProductCategories;
@@ -20,25 +22,31 @@ import retrofit2.Retrofit;
 public class CategoryRepository {
 
     private static CategoryRepository sRepository;
+
+    public static CategoryRepository getInstance() {
+        if (sRepository == null)
+            sRepository = new CategoryRepository();
+        return sRepository;
+    }
+
     private AppService mAppService;
     private MutableLiveData<List<ProductCategories>> mLiveDataDigital = new MutableLiveData<>();
     private MutableLiveData<List<ProductCategories>> mLiveDataClothes = new MutableLiveData<>();
     private MutableLiveData<List<ProductCategories>> mLiveDataBook = new MutableLiveData<>();
     private MutableLiveData<List<ProductCategories>> mLiveDataFood = new MutableLiveData<>();
 
-    public static CategoryRepository getInstance() {
-        if (sRepository == null) {
-            sRepository = new CategoryRepository();
-        }
-        return sRepository;
-    }
-
     private CategoryRepository() {
         Type type = new TypeToken<List<ProductCategories>>() {
         }.getType();
-        Object object = new CategoryDeserializer();
-        Retrofit retrofit = RetrofitInstance.getRetrofitInstance(type, object);
-        mAppService = retrofit.create(AppService.class);
+        try {
+            Object object = new CategoryDeserializer();
+            Retrofit retrofit = RetrofitInstance.getRetrofitInstance(type, object);
+            mAppService = retrofit.create(AppService.class);
+
+        } catch (Exception e) {
+            Log.d("tag", "category repository catch" + e.getMessage());
+        }
+        Log.d("tag", "category repository");
     }
 
     public MutableLiveData<List<ProductCategories>> getLiveDataDigital() {

@@ -25,12 +25,17 @@
         <action
             android:id="@+id/action_navigation_home_to_productDetailFragment"
             app:destination="@id/productDetailFragment"
-            app:popUpTo="@id/navigation_home" />
+            app:popUpTo="@id/navigation_home"
+            app:enterAnim="@anim/fragment_close_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@animator/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/productDetailFragment"
         android:name="com.example.myonlinemarket.ui.ProductDetailFragment"
-        android:label="ProductDetailFragment" >
+        android:label="ProductDetailFragment"
+        tools:layout="@layout/fragment_product_detail">
         <argument
             android:name="product"
             app:argType="com.example.myonlinemarket.model.Product" />

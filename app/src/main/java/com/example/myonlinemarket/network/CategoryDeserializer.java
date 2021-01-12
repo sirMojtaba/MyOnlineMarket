@@ -1,5 +1,7 @@
 package com.example.myonlinemarket.network;
 
+import android.util.Log;
+
 import com.example.myonlinemarket.model.ProductCategories;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
@@ -16,7 +18,7 @@ public class CategoryDeserializer implements JsonDeserializer<List<ProductCatego
     @Override
     public List<ProductCategories> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
             throws JsonParseException {
-
+        Log.d("tag", "category deserializer");
         List<ProductCategories> categoriesList = new ArrayList<>();
         JsonArray body = json.getAsJsonArray();
         for (int i = 0; i <body.size() ; i++) {

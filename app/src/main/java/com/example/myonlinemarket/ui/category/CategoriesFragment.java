@@ -1,6 +1,7 @@
 package com.example.myonlinemarket.ui.category;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,6 +37,7 @@ public class CategoriesFragment extends Fragment {
     private LiveData<List<ProductCategories>> mClothesList;
     private LiveData<List<ProductCategories>> mBookList;
     private LiveData<List<ProductCategories>> mFoodList;
+    private NavController mNavController;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +47,7 @@ public class CategoriesFragment extends Fragment {
         mClothesAdapter = new CategoryAdapter(getContext());
         mBookAdapter = new CategoryAdapter(getContext());
         mFoodAdapter = new CategoryAdapter(getContext());
+        Log.d("tag", "category fragment onCreate");
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,7 +56,15 @@ public class CategoriesFragment extends Fragment {
         setupClothesList();
         setupBooklList();
         setupFoodList();
+        Log.d("tag", "category fragment onCreateView");
         return mBinding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mNavController = Navigation.findNavController(view);
+        Log.d("tag", "category fragment onViewCreated");
     }
 
     private void setupDigitalList() {
@@ -62,6 +75,7 @@ public class CategoriesFragment extends Fragment {
             @Override
             public void onChanged(List<ProductCategories> productCategories) {
                 mDigitalAdapter.setCategoryList(productCategories);
+                mDigitalAdapter.notifyDataSetChanged();
 
             }
         });
