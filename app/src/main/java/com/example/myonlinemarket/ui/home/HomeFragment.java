@@ -101,18 +101,18 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(List<Product> products) {
 //                mProductAdapterMostVisited.setProductList(products);
-                setMostVisitedAdapter();
+                setMostVisitedAdapter(products);
             }
         });
     }
 
-    private void setMostVisitedAdapter() {
+    private void setMostVisitedAdapter(List<Product> products) {
         if (mProductAdapterMostVisited == null) {
             mProductAdapterMostVisited = new ProductAdapter(getContext(), mHomeViewModel, MOST_VISITED_LIST_NUMBER);
             mBinding.recyclerViewMostVisited.setAdapter(mProductAdapterMostVisited);
-        } else {
-            mProductAdapterMostVisited.notifyDataSetChanged();
         }
+        mProductAdapterMostVisited.setProductList(products);
+        mProductAdapterMostVisited.notifyDataSetChanged();
     }
 
     private void setupMostPopularList() {
@@ -125,18 +125,17 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(List<Product> products) {
 //                mProductAdapterMostPopular.setProductList(products);
-                setMostPopulardAdapter();
+                setMostPopulardAdapter(products);
             }
         });
     }
 
-    private void setMostPopulardAdapter() {
+    private void setMostPopulardAdapter(List<Product> products) {
         if (mProductAdapterMostPopular == null) {
             mProductAdapterMostPopular = new ProductAdapter(getContext(), mHomeViewModel, MOST_POPULAR_LIST_NUMBER);
             mBinding.recyclerViewMostPopular.setAdapter(mProductAdapterMostPopular);
-        } else {
-            mProductAdapterMostPopular.notifyDataSetChanged();
         }
+        mProductAdapterMostPopular.setProductList(products);
     }
 
     private void onNewestListItemSelected() {

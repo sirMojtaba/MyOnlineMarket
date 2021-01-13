@@ -14,16 +14,11 @@
         <ImageView
             android:id="@+id/image_view_first_item"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="69dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="31dp"
-            app:srcCompat="@drawable/ic_home_black_24dp"
             tools:ignore="VectorDrawableCompat" />
     </RelativeLayout>
 </layout>

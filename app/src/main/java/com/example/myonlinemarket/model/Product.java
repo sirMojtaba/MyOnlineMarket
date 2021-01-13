@@ -22,7 +22,7 @@ public class Product implements Serializable {
     }
 
     public String getPrice() {
-        return mPrice;
+        return mPrice + " تومان";
     }
 
     public void setPrice(String price) {
@@ -44,12 +44,6 @@ public class Product implements Serializable {
     public void setDescription(String description) {
         mDescription = description;
     }
-
-    /*public String getFetcherImage(){
-        if (mImageUrls == null || mImageUrls.size()==0)
-            return null;
-        return mImageUrls.get(0);
-    }*/
 
     public Product(String name, String description, String price, List<String> ImageUrls) {
         mName = name;

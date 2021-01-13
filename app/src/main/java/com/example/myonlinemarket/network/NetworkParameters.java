@@ -1,7 +1,5 @@
 package com.example.myonlinemarket.network;
 
-import android.util.Log;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,19 +20,16 @@ public class NetworkParameters {
     }};
 
     public static Map<String, String> queryMostVisitedList = new HashMap<String, String>() {{
-        put("consumer_key", CONSUMER_KEY);
-        put("consumer_secret", CONSUMER_SECRET);
+        putAll(queryNewestList);
         put("orderby", "popularity");
     }};
 
     public static Map<String, String> queryRatingList = new HashMap<String, String>() {{
-        put("consumer_key", CONSUMER_KEY);
-        put("consumer_secret", CONSUMER_SECRET);
+        putAll(queryNewestList);
         put("orderby", "rating");
     }};
 
     public static Map<String, String> queryDigitalCategoryList = new HashMap<String, String>() {{
-        put("consumer_key", CONSUMER_KEY);
-        put("consumer_secret", CONSUMER_SECRET);
+        putAll(queryNewestList);
     }};
 }

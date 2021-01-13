@@ -60,14 +60,27 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         if (holder instanceof ImageViewHolder) {
-            if (mListNumber == 0)
-                ((ImageViewHolder) holder).mImageView.setBackgroundResource(R.drawable.ic_dashboard_black_24dp);
-            else if (mListNumber == 1)
-                ((ImageViewHolder) holder).mImageView.setBackgroundResource(R.drawable.ic_home_black_24dp);
-            else
-                ((ImageViewHolder) holder).mImageView.setBackgroundResource(R.drawable.ic_notifications_black_24dp);
+
+            Picasso.get()
+                    .load(imageId())
+                    .centerInside()
+                    .fit()
+                    .into(((ImageViewHolder) holder).mImageView);
         } else {
             ((ProductViewHolder) holder).bindProduct(position - 1);
+        }
+    }
+
+    public int imageId() {
+        switch (mListNumber) {
+            case 0:
+               return R.drawable.newestlistfirstitem;
+            case 1:
+                return R.drawable.mostvisited;
+            case 2:
+                return R.drawable.mostpopular;
+            default:
+                return -1;
         }
     }
 
@@ -100,7 +113,7 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             mBinding.executePendingBindings();
             mProduct = mProductList.get(position);
             mBinding.textViewTitle.setText(mProduct.getName());
-            mBinding.textViewPrice.setText(mProduct.getPrice() + " تومان");
+            mBinding.textViewPrice.setText(mProduct.getPrice());
             Picasso.get()
                     .load(mProduct.getImageUrls().get(0))
                     .fit()

@@ -36,7 +36,7 @@
                 android:background="#F0384E"
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@id/text_view_newest"
-                tools:layout_editor_absoluteX="0dp"/>
+                tools:layout_editor_absoluteX="0dp" />
 
             <TextView
                 android:id="@+id/text_view_most_visited"

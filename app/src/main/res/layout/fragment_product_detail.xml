@@ -13,7 +13,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#EAEAEA">
+        android:background="#F6F6F6">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -94,7 +94,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bottom_layout"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="60dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
@@ -112,37 +112,22 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
-                android:id="@+id/text_view_toman"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
-                android:fontFamily="@font/byekan"
-                android:gravity="center_vertical"
-                android:text="تومان"
-                android:textColor="#000000"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/text_view_price"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
                 android:id="@+id/text_view_price"
-                android:layout_width="190dp"
+                android:layout_width="170dp"
                 android:layout_height="match_parent"
-                android:layout_toRightOf="@id/text_view_toman"
                 android:fontFamily="@font/byekan"
                 android:gravity="start|center_vertical"
                 android:text="@{product.price}"
-                android:textAlignment="viewStart"
+                android:textAlignment="textEnd"
                 android:textColor="#000000"
+                android:textDirection="rtl"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/button_cart"
-                app:layout_constraintLeft_toRightOf="@id/text_view_toman"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="RtlCompat" />
 
             <Button
                 android:id="@+id/button_cart"
